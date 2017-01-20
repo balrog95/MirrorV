@@ -3,30 +3,33 @@
 from tkinter import Tk, Frame, Label, BOTH
 import time
 
-class Display(Frame):
+class MirrorV(Frame):
 
     def __init__(self, parent):
         Frame.__init__(self, parent, background="white")
         self.parent = parent
-        self.time1 = ''
         self.initUI()
 
     def initUI(self):
         self.parent.title("MirrorV")
-        self.pack(fill=BOTH, expand=1)
         self.makeFullscreen()
+        #make clock into its own frame and add it to the overall frame
+        #possibly break clock out into its own module/class
+        #maybe make it text on canvas rather than a label
+        #figure out how to make it a nice looking font
         self.displayClock()
     
     def makeFullscreen(self):
         self.parent.attributes("-fullscreen", True);
 
     def displayClock(self):
-        self.clock = Label(self.parent, font=('times', 20, 'bold'), bg='green')
+        self.clock = Label(self.parent, font=('Helvetica', 45), bg='black')
         self.clock.pack(fill=BOTH, expand=1)
+        self.time1 = ''
         self.tick()
 
     def tick(self):
-        time2 = time.strftime('%H:%M:%S')
+        time2 = time.strftime('%I:%M')
         if time2 != self.time1:
             self.time1 = time2
             self.clock.config(text=time2)
@@ -35,7 +38,7 @@ class Display(Frame):
 def main():
     root = Tk()
     root.geometry("250x150+300+300")
-    app = Display(root)
+    app = MirrorV(root)
     root.mainloop()
 
 if __name__ == '__main__':
