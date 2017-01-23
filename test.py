@@ -33,7 +33,7 @@ class MirrorV(Frame):
         if time2 != self.time1:
             self.time1 = time2
             self.clock.config(text=time2)
-        self.clock.after(200, self.tick)
+        self.clock.after(2000, self.tick)
 
 def main():
     root = Tk()
